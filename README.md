@@ -127,7 +127,7 @@ spec:
             pathType: Prefix
           - backend:
               service:
-                name: keycla
+                name: keycloak
                 port:
                   number: 443
             path: /keycloak
