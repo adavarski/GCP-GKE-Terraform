@@ -97,7 +97,7 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 
 Note1: GCP terraform network module (platform static addresses for K8S Ingresses, DNS: add api.example.dev & example.dev A records before k8s ingress creation)
 
-Note2: To find the reserved static IP addresses, run the following command `gcloud compute addresses describe dev1-static-ip --global` or get from terraform output (network module) 
+Note2: To find the reserved static IP addresses, run the following command `gcloud compute addresses describe dev1-static-ip --global` or get from terraform output (network module) and Update or Create a DNS A record to point to the static IP address you reserved via terraform (network) for managed certificate to work.
 
 ```
 apiVersion: networking.k8s.io/v1
