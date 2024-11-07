@@ -175,7 +175,6 @@ kubectl apply -f ingress.yaml
 It will take a few minutes for the certificate to be provisioned.
 
 Etc.
-```
 
 Note4: GitOps with ArgoCD for K8S workloads -> REF: https://github.com/adavarski/ArgoCD-GitOps-playground
 
