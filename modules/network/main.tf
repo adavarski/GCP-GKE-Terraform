@@ -9,5 +9,5 @@ resource "google_compute_global_address" "ips" {
 }
 
 output "integration_hub_address" {
-  value = google_compute_global_address.ips["client1-static-ip"].address
+  value = google_compute_global_address.ips["dev1-static-ip"].address
 }
