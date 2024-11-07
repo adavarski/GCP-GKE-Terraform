@@ -158,6 +158,8 @@ spec:
   domains:
     - api.example.dev
 
+It will take a few minutes for the certificate to be provisioned.
+
 Etc.
 ```
 
