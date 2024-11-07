@@ -161,6 +161,7 @@ spec:
   domains:
     - api.example.dev
 
+```
 Note ingress.yaml declarative file to include
 ```
 networking.gke.io/managed-certificates: dev1-certificate, dev1-certificate-api
