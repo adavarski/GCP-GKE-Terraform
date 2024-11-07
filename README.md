@@ -95,10 +95,11 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 ```
 ### Notes
 
-Note1: GCP terraform network module (platform static addresses for K8S Ingresses, DNS: add api.example.dev & example.dev A records before k8s ingress creation)
+Note1: GCP terraform network module (platform static addresses for K8S Ingresses, DNS: add api.example.dev & example.dev A records before k8s ingress creation). If not using terraform network module we can Reserve a global IP address to be used for the Google Cloud Load Balancer (GCLB): `gcloud compute addresses create dev1-static-ip --global`
 
 Note2: To find the reserved static IP addresses, run the following command `gcloud compute addresses describe dev1-static-ip --global` or get from terraform output (network module) and Update or Create a DNS A record to point to the static IP address you reserved via terraform (network) for managed certificate to work.
 
+Create an ingress.yaml declarative file. This declarative file declares a GCLB to be created, and it will route the traffic to the Global IP address reserved via terraform network module or via CLI `gcloud compute addresses create dev1-static-ip --global`
 ```
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -139,6 +140,8 @@ spec:
 
 Note3: Use GCP ManagedCertificate for easy certificates maintenance 
 
+Create a certificates yaml declarative files, which will create a new managed certificate, and replace example.dev with your DNS A record:
+
 apiVersion: networking.gke.io/v1
 kind: ManagedCertificate
 metadata:
@@ -157,6 +160,16 @@ metadata:
 spec:
   domains:
     - api.example.dev
+
+Note ingress.yaml declarative file to include
+```
+networking.gke.io/managed-certificates: dev1-certificate, dev1-certificate-api
+```
+Apply configuration
+```
+kubectl apply -f certificate.yaml
+kubectl apply -f ingress.yaml
+```
 
 It will take a few minutes for the certificate to be provisioned.
 
